@@ -20,10 +20,24 @@ namespace BlackJackGame
 {
     internal class Card
     {
+        public CardRank Rank { get; set; }
+        public CardSuit Suit { get; set; }
 
-
-
-
+       public int value
+        {
+            get
+            {
+                if (Rank == CardRank.Ace)
+                    return 11;
+                if (Rank >= CardRank.Ten) 
+                    return 10;
+                return (int)Rank+2;
+            }
+        }
+        public override string ToString()
+        {
+            return $"{Rank} of {Suit}";
+        }
 
     }
 }
