@@ -19,6 +19,13 @@
                 dealerHand = new List<Card>();
             }
 
+            public void InitializeGame()
+            {
+                Console.WriteLine("Welcome to Blackjack!");
+                Console.Write("Enter the number of chips you want to buy-in: ");
+                PlayerChips = int.Parse(Console.ReadLine());
+            }
+
             public void InitializeDeck()
             {
                 // Create a new list to represent the deck of cards.
@@ -50,6 +57,7 @@
                     (deck[j], deck[k]) = (deck[k], deck[j]);
                 }
             }
+
 
 
 

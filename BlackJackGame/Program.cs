@@ -1,10 +1,14 @@
-﻿namespace BlackJackGame
+﻿using static BlackJackGame.BlackJackGame;
+
+namespace BlackJackGame
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-           //add mehtod to call game
+            BlackjackGame game = new BlackjackGame();
+            game.InitializeGame();
+            
         }
     }
 }
