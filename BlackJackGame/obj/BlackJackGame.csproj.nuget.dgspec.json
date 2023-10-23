@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Owner\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJack\\BlackJackGame\\BlackJackGame\\BlackJackGame.csproj": {}
+    "C:\\Users\\S00236260\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJackGame\\BlackJackGame\\BlackJackGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Owner\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJack\\BlackJackGame\\BlackJackGame\\BlackJackGame.csproj": {
+    "C:\\Users\\S00236260\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJackGame\\BlackJackGame\\BlackJackGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Owner\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJack\\BlackJackGame\\BlackJackGame\\BlackJackGame.csproj",
+        "projectUniqueName": "C:\\Users\\S00236260\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJackGame\\BlackJackGame\\BlackJackGame.csproj",
         "projectName": "BlackJackGame",
-        "projectPath": "C:\\Users\\Owner\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJack\\BlackJackGame\\BlackJackGame\\BlackJackGame.csproj",
-        "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Owner\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJack\\BlackJackGame\\BlackJackGame\\obj\\",
+        "projectPath": "C:\\Users\\S00236260\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJackGame\\BlackJackGame\\BlackJackGame.csproj",
+        "packagesPath": "C:\\Users\\S00236260\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\S00236260\\OneDrive - Atlantic TU\\Y2\\Sem_1\\Object Oriented Programming\\BlackJackGame\\BlackJackGame\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Owner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\S00236260\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
