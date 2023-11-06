@@ -60,17 +60,20 @@
 
             public void PlaceBet()
             {
-                Console.WriteLine($"You have {PlayerChips} chips.");
-                Console.Write("Enter your bet: ");
-                Bet = int.Parse(Console.ReadLine());
+                while (true)
+                {
+                    Console.WriteLine($"You have {PlayerChips} chips.");
+                    Console.Write("Enter your bet: ");
+                    Bet = int.Parse(Console.ReadLine());
 
-                if (Bet <= 0 || Bet > PlayerChips)
-                {
-                    Console.WriteLine("Invalid bet amount. Please try again.");
-                }
-                else
-                {
-                    break;
+                    if (Bet <= 0 || Bet > PlayerChips)
+                    {
+                        Console.WriteLine("Invalid bet amount. Please try again.");
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -103,7 +106,7 @@
 
 
 
-        }
+            }
     }
 
 }
