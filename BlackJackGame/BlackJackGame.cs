@@ -60,18 +60,26 @@
 
             public void PlaceBet()
             {
+                // This method allows the player to place a bet in a game.
+
                 while (true)
                 {
+                    // Display the number of chips the player currently has.
                     Console.WriteLine($"You have {PlayerChips} chips.");
+
+                    // Prompt the player to enter their bet.
                     Console.Write("Enter your bet: ");
                     Bet = int.Parse(Console.ReadLine());
 
+                    // Check if the entered bet is invalid (less than or equal to 0 or more than the player's chips).
                     if (Bet <= 0 || Bet > PlayerChips)
                     {
+                        // Display an error message and ask the player to try again.
                         Console.WriteLine("Invalid bet amount. Please try again.");
                     }
                     else
                     {
+                        // If the bet is valid, exit the loop and proceed.
                         break;
                     }
                 }
@@ -106,7 +114,8 @@
 
 
 
-            }
+
+        }
     }
 
 }
