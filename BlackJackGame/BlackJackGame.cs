@@ -21,6 +21,7 @@
 
             public void InitializeGame()
             {
+                //Welcoming player to Blackjack.
                 Console.WriteLine("Welcome to Blackjack!");
                 Console.Write("Enter the number of chips you want to buy-in: ");
                 PlayerChips = int.Parse(Console.ReadLine());
