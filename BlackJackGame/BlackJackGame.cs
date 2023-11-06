@@ -60,15 +60,21 @@
 
             public void DealInitialHands()
             {
+                // Shuffle the deck to ensure randomness in card distribution.
                 ShuffleDeck();
+
+                // Clear the player's and dealer's hands to start with empty hands.
                 playerHand.Clear();
                 dealerHand.Clear();
 
+                // Deal two cards to both the player and the dealer.
                 for (int i = 0; i < 2; i++)
                 {
+                    // Add the first card from the shuffled deck to the player's hand and remove it from the deck.
                     playerHand.Add(deck[0]);
                     deck.RemoveAt(0);
 
+                    // Add the first card from the shuffled deck to the dealer's hand and remove it from the deck.
                     dealerHand.Add(deck[0]);
                     deck.RemoveAt(0);
                 }
