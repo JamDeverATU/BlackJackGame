@@ -8,6 +8,7 @@ namespace BlackJackGame
         {
             BlackjackGame game = new BlackjackGame();
             game.InitializeGame();
+            game.Play();
            
         }
     }

@@ -18,15 +18,6 @@
                 playerHand = new List<Card>();
                 dealerHand = new List<Card>();
             }
-
-            public void InitializeGame()
-            {
-                //Welcoming player to Blackjack.
-                Console.WriteLine("Welcome to Blackjack!");
-                Console.Write("Enter the number of chips you want to buy-in: ");
-                PlayerChips = int.Parse(Console.ReadLine());
-            }
-
             public void InitializeDeck()
             {
                 // Create a new list to represent the deck of cards.
@@ -45,19 +36,81 @@
             }
             public void ShuffleDeck()
             {
-                // Create a Random object to generate random numbers.
+                // Create a new Random object to generate random numbers for shuffling.
                 Random random = new Random();
 
-                // Iterate through the deck in reverse order.
-                for (int j = deck.Count - 1; j > 0; j--)
-                {
-                    // Generate a random index between 0 and j (inclusive).
-                    int k = random.Next(j + 1);
+                // Get the number of cards in the deck.
+                int n = deck.Count;
 
-                    // Swap the cards at indices j and k.
-                    (deck[j], deck[k]) = (deck[k], deck[j]);
+                // Start the Fisher-Yates shuffle algorithm.
+                while (n > 1)
+                {
+                    // Decrease n by 1 in each iteration.
+                    n--;
+
+                    // Generate a random index (k) between 0 and the current value of n.
+                    int k = random.Next(n + 1);
+
+                    // Swap the card at index k with the card at index n.
+                    Card value = deck[k];
+                    deck[k] = deck[n];
+                    deck[n] = value;
                 }
             }
+
+            public void DealInitialHands()
+            {
+                ShuffleDeck();
+                playerHand.Clear();
+                dealerHand.Clear();
+
+                for (int i = 0; i < 2; i++)
+                {
+                    playerHand.Add(deck[0]);
+                    deck.RemoveAt(0);
+
+                    dealerHand.Add(deck[0]);
+                    deck.RemoveAt(0);
+                }
+            }
+
+            public int CalculateHandValue(List<Card> hand)
+            {
+                // Initialize the variables to keep track of the total hand value and the number of Aces in the hand.
+                int value = 0;
+                int aces = 0;
+
+                // Iterate through each card in the hand.
+                foreach (Card card in hand)
+                {
+                    // Add the card's value to the total hand value.
+                    value += card.Value;
+
+                    // Check if the card is an Ace.
+                    if (card.Rank == CardRank.Ace)
+                        aces++;
+                }
+
+                // Check for a special case: if the hand's value is over 21 and there are Aces in the hand.
+                while (value > 21 && aces > 0)
+                {
+                    // If the hand's value is over 21 and there's at least one Ace, treat one Ace as having a value of 1 instead of 11.
+                    value -= 10;
+                    aces--;
+                }
+
+                // Return the final calculated hand value, considering Aces' values.
+                return value;
+            }
+
+            public void InitializeGame()
+            {
+                //Welcoming player to Blackjack.
+                Console.WriteLine("Welcome to Blackjack!");
+                Console.Write("Enter the number of chips you want to buy-in: ");
+                PlayerChips = int.Parse(Console.ReadLine());
+            }
+            
 
             public void PlaceBet()
             {
@@ -86,63 +139,23 @@
                 }
             }
 
-            public void ShuffleDeck()
+            public void UpdateChips(int result)
             {
-                // Create a new Random object to generate random numbers.
-                Random random = new Random();
+                // The method updates the player's chip balance based on the game's result.
 
-                // Get the number of cards in the deck.
-                int n = deck.Count;
-
-                while (n > 1)
+                // If the result is 1, it means the player won the game.
+                if (result == 1)
                 {
-                    n--;
-
-                    // Generate a random index (k) between 0 and the current value of n.
-                    int k = random.Next(n + 1);
-
-                    // Swap the card at index k with the card at index n.
-                    Card value = deck[k];
-                    deck[k] = deck[n];
-                    deck[n] = value;
+                    // Increase the player's chip balance by the amount they bet.
+                    PlayerChips += Bet;
+                }
+                // If the result is -1, it means the player lost the game.
+                else if (result == -1)
+                {
+                    // Decrease the player's chip balance by the amount they bet.
+                    PlayerChips -= Bet;
                 }
             }
-
-
-
-
-
-
-
-
-
-            public void Play()
-            {
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
