@@ -86,6 +86,36 @@
                 }
             }
 
+            public void ShuffleDeck()
+            {
+                // Create a new Random object to generate random numbers.
+                Random random = new Random();
+
+                // Get the number of cards in the deck.
+                int n = deck.Count;
+
+                while (n > 1)
+                {
+                    n--;
+
+                    // Generate a random index (k) between 0 and the current value of n.
+                    int k = random.Next(n + 1);
+
+                    // Swap the card at index k with the card at index n.
+                    Card value = deck[k];
+                    deck[k] = deck[n];
+                    deck[n] = value;
+                }
+            }
+
+
+
+
+
+
+
+
+
             public void Play()
             {
             }
