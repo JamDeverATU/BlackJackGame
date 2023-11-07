@@ -112,6 +112,8 @@
             public void InitializeGame()
             {
                 //Welcoming player to Blackjack.
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Yellow;//some colour
                 Console.WriteLine("Welcome to Blackjack!");
                 Console.Write("Enter the number of chips you want to buy-in: ");
                 PlayerChips = int.Parse(Console.ReadLine());
