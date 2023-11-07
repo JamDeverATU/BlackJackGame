@@ -166,12 +166,82 @@
             public void Play()
             {
 
+                while (PlayerChips > 0)
+                {
+                    PlaceBet();
+                    DealInitialHands();
+
+                    Console.WriteLine($"Your hand: {string.Join(", ", playerHand)}");
+                    
+                    if (CalculateHandValue(playerHand) == 21)
+                    {
+                        Console.WriteLine("Congratulations! You got a natural blackjack!");
+                        UpdateChips(1);
+                    }
+                    else
+                    {
+                        while (true)
+                        {
+                            Console.Write("Do you want to (H)it or (S)tand? ");
+                            string choice = Console.ReadLine().ToUpper();
+
+                            if (choice == "H")
+                            {
+                                playerHand.Add(deck[0]);
+                                deck.RemoveAt(0);
+                                Console.WriteLine($"Your hand: {string.Join(", ", playerHand)}");
+
+                                if (CalculateHandValue(playerHand) > 21)
+                                {
+                                    Console.WriteLine("Bust! You went over 21. Dealer wins.");
+                                    UpdateChips(-1);
+                                    break;
+                                }
+                            }
+                            else if (choice == "S")
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid choice. Please enter 'H' for Hit or 'S' for Stand.");
+                            }
+                        }
+
+                        while (CalculateHandValue(dealerHand) < 17)
+                        {
+                            dealerHand.Add(deck[0]);
+                            deck.RemoveAt(0);
+                        }
+                        Console.WriteLine($"Dealer's hand: {string.Join(", ", dealerHand)}");
+
+                        int playerValue = CalculateHandValue(playerHand);
+                        int dealerValue = CalculateHandValue(dealerHand);
+
+                        if (dealerValue > 21 || playerValue > dealerValue)
+                        {
+                            Console.WriteLine("Congratulations! You win!");
+                            UpdateChips(1);
+                        }
+                        else if (playerValue == dealerValue)
+                        {
+                            Console.WriteLine("It's a tie. Your bet is returned.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Dealer wins. You lose.");
+                            UpdateChips(-1);
+                        }
+                    }
+
+                    Console.WriteLine($"You have {PlayerChips} chips.");
+                    Console.Write("Play another round? (Y/N): ");
+                    if (Console.ReadLine().ToUpper() != "Y") break;
+                }
+
+                Console.WriteLine("Thanks for playing Blackjack!");
             }
-
-
-
-
         }
     }
+ }
 
-}
