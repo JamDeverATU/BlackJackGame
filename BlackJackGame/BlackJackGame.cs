@@ -109,15 +109,38 @@
                 return value;
             }
 
-            public void InitializeGame()
+           public void InitializeGame()
             {
-                //Welcoming player to Blackjack.
+                // Welcoming player to Blackjack.
                 Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Yellow;//some colour
+                Console.ForegroundColor = ConsoleColor.Yellow; // Set some color
                 Console.WriteLine("Welcome to Blackjack!");
-                Console.Write("Enter the number of chips you want to buy-in: ");
-                PlayerChips = int.Parse(Console.ReadLine());
+                Console.WriteLine("Max amount of chips is 999999999!!!!!");
+
+                while (true)
+                {
+                    Console.Write("Enter the number of chips you want to buy-in: ");
+
+                    if (int.TryParse(Console.ReadLine(), out int inputChips))
+                    {
+                        if (inputChips <= 999999999)
+                        {
+                            PlayerChips = inputChips;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid amount of chips. Please enter a value less than or equal to 999999999.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid number.");
+                    }
+                }
             }
+
+
             
 
             public void PlaceBet()
