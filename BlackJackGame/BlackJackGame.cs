@@ -1,4 +1,7 @@
-﻿namespace BlackJackGame
+﻿//James Mccafferty Devers
+//s00236260
+//ObjectOrientedProgramming - 15%
+namespace BlackJackGame
 {
 
     internal class BlackJackGame
