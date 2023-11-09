@@ -165,6 +165,11 @@
                 }
             }
 
+            public void DoubleDown()
+            {
+
+            }
+
             public void Play()
             {
                 // The main game loop starts as long as the player has chips.
@@ -254,6 +259,9 @@
 
                 Console.WriteLine("Thanks for playing Blackjack!"); // End of the game.
             }
+
+            
+{
             
         }
     }
