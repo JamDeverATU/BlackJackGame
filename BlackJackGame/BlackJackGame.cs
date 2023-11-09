@@ -227,7 +227,8 @@
                     PlaceBet();
                     DealInitialHands();
 
-                    Console.WriteLine($"Your hand: {string.Join(", ", playerHand)}");
+                    // Display the player's initial hand with card values.
+                    Console.WriteLine($"Your hand: {string.Join(", ", playerHand.Select(card => $"{card} (value {card.Value})"))}");
 
                     if (CalculateHandValue(playerHand) == 21)
                     {
@@ -246,7 +247,9 @@
                                 // Player chooses to hit.
                                 playerHand.Add(deck[0]);
                                 deck.RemoveAt(0);
-                                Console.WriteLine($"Your hand: {string.Join(", ", playerHand)}");
+                    
+                                // Display the updated hand with card values.
+                                Console.WriteLine($"Your hand: {string.Join(", ", playerHand.Select(card => $"{card} (value {card.Value})"))}");
 
                                 // Check if the player busts (goes over 21).
                                 if (CalculateHandValue(playerHand) > 21)
@@ -279,7 +282,7 @@
                             dealerHand.Add(deck[0]);
                             deck.RemoveAt(0);
                         }
-                        Console.WriteLine($"Dealer's hand: {string.Join(", ", dealerHand)}");
+                        Console.WriteLine($"Dealer's hand: {string.Join(", ", dealerHand.Select(card => $"{card} (value {card.Value})"))}");
 
                         // Determine the winner based on the hand values.
                         int playerValue = CalculateHandValue(playerHand);
@@ -309,6 +312,7 @@
 
                 Console.WriteLine("Thanks for playing Blackjack!");
             }
+
 
 
             
