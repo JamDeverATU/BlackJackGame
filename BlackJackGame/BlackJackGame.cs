@@ -312,11 +312,6 @@
 
                 Console.WriteLine("Thanks for playing Blackjack!");
             }
-
-
-
-            
-
             
         }
     }
