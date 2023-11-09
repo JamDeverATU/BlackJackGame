@@ -167,6 +167,28 @@
 
             public void DoubleDown()
             {
+                if (Bet * 2 > PlayerChips)
+                {
+                    Console.WriteLine("Not enough chips to double down. Choose another action.");
+                    return;
+                }
+
+                Bet *= 2;
+
+                playerHand.Add(deck[0]);
+                deck.RemoveAt(0);
+                Console.WriteLine($"Your hand after doubling down: {string.Join(", ", playerHand)}");
+
+                if (CalculateHandValue(playerHand) > 21)
+                {
+                    Console.WriteLine("Bust! You went over 21. Dealer wins.");
+                    UpdateChips(-1);
+                }
+                else
+                {
+                    Console.WriteLine("Dealer wins. You lose.");
+                    UpdateChips(-1);//??
+                }
 
             }
 
