@@ -165,7 +165,7 @@
                 }
             }
 
-            public void DoubleDown()
+           public void DoubleDown()
             {
                 if (Bet * 2 > PlayerChips)
                 {
@@ -186,37 +186,53 @@
                 }
                 else
                 {
-                    Console.WriteLine("Dealer wins. You lose.");
-                    UpdateChips(-1);//??
-                }
-
-            }
-
-            public void Play()
-            {
-                // The main game loop starts as long as the player has chips.
-                while (PlayerChips > 0)
-                {
-                    // Allow the player to place a bet.
-                    PlaceBet();
-                    // Deal the initial hands for the player and dealer.
-                    DealInitialHands();
-
-                    // Display the player's hand and the dealer's visible card.
-                    Console.WriteLine($"Your hand: {string.Join(", ", playerHand)}");
-        
-                    // Check if the player has a natural blackjack (21 with two cards).
-                    if (CalculateHandValue(playerHand) == 21)
+                    while (CalculateHandValue(dealerHand) < 17)
                     {
-                        Console.WriteLine("Congratulations! You got a natural blackjack!");
-                        UpdateChips(1); // Player wins with a blackjack.
+                        dealerHand.Add(deck[0]);
+                        deck.RemoveAt(0);
+                    }
+                    Console.WriteLine($"Dealer's hand: {string.Join(", ", dealerHand)}");
+
+                    int playerValue = CalculateHandValue(playerHand);
+                    int dealerValue = CalculateHandValue(dealerHand);
+
+                    if (dealerValue > 21 || playerValue > dealerValue)
+                    {
+                        Console.WriteLine("Congratulations! You win!");
+                        UpdateChips(1);
+                    }
+                    else if (playerValue == dealerValue)
+                    {
+                        Console.WriteLine("It's a tie. Your bet is returned.");
                     }
                     else
                     {
-                        // The player's turn: Hit or Stand.
+                        Console.WriteLine("Dealer wins. You lose.");
+                        UpdateChips(-1);
+                    }
+                }
+            }
+            
+
+            public void Play()
+            {
+                while (PlayerChips > 0)
+                {
+                    PlaceBet();
+                    DealInitialHands();
+
+                    Console.WriteLine($"Your hand: {string.Join(", ", playerHand)}");
+
+                    if (CalculateHandValue(playerHand) == 21)
+                    {
+                        Console.WriteLine("Congratulations! You got a natural blackjack!");
+                        UpdateChips(1);
+                    }
+                    else
+                    {
                         while (true)
                         {
-                            Console.Write("Do you want to (H)it or (S)tand? ");
+                            Console.Write("Do you want to (H)it, (S)tand, or (D)ouble down? ");
                             string choice = Console.ReadLine().ToUpper();
 
                             if (choice == "H")
@@ -230,8 +246,8 @@
                                 if (CalculateHandValue(playerHand) > 21)
                                 {
                                     Console.WriteLine("Bust! You went over 21. Dealer wins.");
-                                    UpdateChips(-1); // Player loses.
-                                    break; // Exit the player's turn.
+                                    UpdateChips(-1);
+                                    break;
                                 }
                             }
                             else if (choice == "S")
@@ -239,13 +255,19 @@
                                 // Player chooses to stand, exit the player's turn.
                                 break;
                             }
+                            else if (choice == "D")
+                            {
+                                // Player chooses to double down.
+                                DoubleDown();
+                                break;
+                            }
                             else
                             {
-                                Console.WriteLine("Invalid choice. Please enter 'H' for Hit or 'S' for Stand.");
+                                Console.WriteLine("Invalid choice. Please enter 'H' for Hit, 'S' for Stand, or 'D' for Double Down.");
                             }
                         }
 
-                        // The dealer's turn: Reveal the hidden card and hit until at least 17 points.
+                        // Dealer's turn: Reveal the hidden card and hit until at least 17 points.
                         while (CalculateHandValue(dealerHand) < 17)
                         {
                             dealerHand.Add(deck[0]);
@@ -260,7 +282,7 @@
                         if (dealerValue > 21 || playerValue > dealerValue)
                         {
                             Console.WriteLine("Congratulations! You win!");
-                            UpdateChips(1); // Player wins.
+                            UpdateChips(1);
                         }
                         else if (playerValue == dealerValue)
                         {
@@ -269,21 +291,22 @@
                         else
                         {
                             Console.WriteLine("Dealer wins. You lose.");
-                            UpdateChips(-1); // Player loses.
+                            UpdateChips(-1);
                         }
                     }
 
                     // Display the player's remaining chips and ask if they want to play another round.
                     Console.WriteLine($"You have {PlayerChips} chips.");
                     Console.Write("Play another round? (Y/N): ");
-                    if (Console.ReadLine().ToUpper() != "Y") break; // Exit the game loop if the player doesn't want to continue.
+                    if (Console.ReadLine().ToUpper() != "Y") break;
                 }
 
-                Console.WriteLine("Thanks for playing Blackjack!"); // End of the game.
+                Console.WriteLine("Thanks for playing Blackjack!");
             }
 
+
             
-{
+
             
         }
     }
