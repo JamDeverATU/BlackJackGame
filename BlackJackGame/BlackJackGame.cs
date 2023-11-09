@@ -140,9 +140,6 @@
                 }
             }
 
-
-            
-
             public void PlaceBet()
             {
                 // This method allows the player to place a bet in a game.
@@ -154,18 +151,18 @@
 
                     // Prompt the player to enter their bet.
                     Console.Write("Enter your bet: ");
-                    Bet = int.Parse(Console.ReadLine());
 
-                    // Check if the entered bet is invalid (less than or equal to 0 or more than the player's chips).
-                    if (Bet <= 0 || Bet > PlayerChips)
+                    // Validate and parse the entered bet.
+                    if (int.TryParse(Console.ReadLine(), out int inputBet) && inputBet > 0 && inputBet <= PlayerChips)
                     {
-                        // Display an error message and ask the player to try again.
-                        Console.WriteLine("Invalid bet amount. Please try again.");
+                        // If the bet is valid, set the Bet property and exit the loop.
+                        Bet = inputBet;
+                        break;
                     }
                     else
                     {
-                        // If the bet is valid, exit the loop and proceed.
-                        break;
+                        // Display an error message and ask the player to try again.
+                        Console.WriteLine("Invalid bet amount. Please try again.");
                     }
                 }
             }
@@ -243,14 +240,13 @@
             }
             
 
-            public void Play()
+           public void Play()
             {
                 while (PlayerChips > 0)
                 {
                     PlaceBet();
                     DealInitialHands();
 
-                    // Display the player's initial hand with card values.
                     Console.WriteLine($"Your hand: {string.Join(", ", playerHand.Select(card => $"{card} (value {card.Value})"))}");
 
                     if (CalculateHandValue(playerHand) == 21)
@@ -267,14 +263,11 @@
 
                             if (choice == "H")
                             {
-                                // Player chooses to hit.
                                 playerHand.Add(deck[0]);
                                 deck.RemoveAt(0);
-                    
-                                // Display the updated hand with card values.
+
                                 Console.WriteLine($"Your hand: {string.Join(", ", playerHand.Select(card => $"{card} (value {card.Value})"))}");
 
-                                // Check if the player busts (goes over 21).
                                 if (CalculateHandValue(playerHand) > 21)
                                 {
                                     Console.WriteLine("Bust! You went over 21. Dealer wins.");
@@ -284,12 +277,10 @@
                             }
                             else if (choice == "S")
                             {
-                                // Player chooses to stand, exit the player's turn.
                                 break;
                             }
                             else if (choice == "D")
                             {
-                                // Player chooses to double down.
                                 DoubleDown();
                                 break;
                             }
@@ -299,7 +290,6 @@
                             }
                         }
 
-                        // Dealer's turn: Reveal the hidden card and hit until at least 17 points.
                         while (CalculateHandValue(dealerHand) < 17)
                         {
                             dealerHand.Add(deck[0]);
@@ -307,7 +297,6 @@
                         }
                         Console.WriteLine($"Dealer's hand: {string.Join(", ", dealerHand.Select(card => $"{card} (value {card.Value})"))}");
 
-                        // Determine the winner based on the hand values.
                         int playerValue = CalculateHandValue(playerHand);
                         int dealerValue = CalculateHandValue(dealerHand);
 
@@ -327,14 +316,22 @@
                         }
                     }
 
-                    // Display the player's remaining chips and ask if they want to play another round.
                     Console.WriteLine($"You have {PlayerChips} chips.");
+
+                    // Check if the player has 0 chips, and exit the program if true.
+                    if (PlayerChips == 0)
+                    {
+                        Console.WriteLine("You're out of chips! Thanks for playing Blackjack!");
+                        Environment.Exit(0);
+                    }
+
                     Console.Write("Play another round? (Y/N): ");
                     if (Console.ReadLine().ToUpper() != "Y") break;
                 }
 
                 Console.WriteLine("Thanks for playing Blackjack!");
             }
+
             
         }
     }
