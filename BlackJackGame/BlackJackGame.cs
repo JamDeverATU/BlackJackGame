@@ -167,25 +167,30 @@
 
            public void DoubleDown()
             {
+                // Check if the player has enough chips to double down.
                 if (Bet * 2 > PlayerChips)
                 {
                     Console.WriteLine("Not enough chips to double down. Choose another action.");
                     return;
                 }
 
+                // Double the bet.
                 Bet *= 2;
 
+                // Deal one more card to the player.
                 playerHand.Add(deck[0]);
                 deck.RemoveAt(0);
                 Console.WriteLine($"Your hand after doubling down: {string.Join(", ", playerHand)}");
 
+                // Check if the player busts (goes over 21).
                 if (CalculateHandValue(playerHand) > 21)
                 {
                     Console.WriteLine("Bust! You went over 21. Dealer wins.");
-                    UpdateChips(-1);
+                    UpdateChips(-1); // Player loses.
                 }
                 else
                 {
+                    // Proceed with the dealer's turn: Reveal the hidden card and hit until at least 17 points.
                     while (CalculateHandValue(dealerHand) < 17)
                     {
                         dealerHand.Add(deck[0]);
@@ -193,13 +198,14 @@
                     }
                     Console.WriteLine($"Dealer's hand: {string.Join(", ", dealerHand)}");
 
+                    // Determine the winner based on the hand values.
                     int playerValue = CalculateHandValue(playerHand);
                     int dealerValue = CalculateHandValue(dealerHand);
 
                     if (dealerValue > 21 || playerValue > dealerValue)
                     {
                         Console.WriteLine("Congratulations! You win!");
-                        UpdateChips(1);
+                        UpdateChips(1); // Player wins.
                     }
                     else if (playerValue == dealerValue)
                     {
@@ -208,7 +214,7 @@
                     else
                     {
                         Console.WriteLine("Dealer wins. You lose.");
-                        UpdateChips(-1);
+                        UpdateChips(-1); // Player loses.
                     }
                 }
             }
